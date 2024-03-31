@@ -14,14 +14,16 @@ def parse_args():
 
 
 async def handler(websocket, path):
-    print(f"Client connected")
-
-    while True:
+    print("[SERVER] Client connected")
+    await websocket.send("[SERVER] Connected...")
+    
+    
+    while True:            
         message = await websocket.recv()
         
-        print(f"Received: {message}")
+        print(f"[SERVER] Received: {message}")
         
-        await websocket.send(f"Server received: {message}")
+        await websocket.send(f"[SERVER] received: {message}")
 
 
 async def main():
