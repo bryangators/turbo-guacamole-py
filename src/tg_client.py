@@ -11,6 +11,7 @@ class TgClient:
                                          on_message=self.on_message,
                                          on_error=self.on_error,
                                          on_close=self.on_close)
+        self.client_thread = threading.Thread(target=self.run)
 
     def on_message(self, ws, message):
         print(message)
@@ -41,13 +42,14 @@ class TgClient:
     
     def format_client_message(self, message):
         return f"[CLIENT] {message}"
-
+    
+    def start(self):
+        self.client_thread.start()
 
 if __name__ == "__main__":
     # example setup for client websocket
     client = TgClient("ws://localhost:8080")
-    client_thread = threading.Thread(target=client.run)
-    client_thread.start()
+    client.start()
     
     #wait for websocket to connect
     # TODO: need a better handling of connection handling 
