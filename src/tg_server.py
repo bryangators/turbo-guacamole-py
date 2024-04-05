@@ -6,7 +6,7 @@ import argparse
 def parse_args():
     parser = argparse.ArgumentParser()
     
-    parser.add_argument('-p', '--port', type=int, default=8000, help='Port to run the websocket server on.')
+    parser.add_argument('-p', '--port', type=int, default=8080, help='Port to run the websocket server on.')
     
     args = parser.parse_args()
     
@@ -17,13 +17,14 @@ async def handler(websocket, path):
     print("[SERVER] Client connected")
     await websocket.send("[SERVER] Connected...")
     
-    
-    while True:            
-        message = await websocket.recv()
-        
-        print(f"[SERVER] Received: {message}")
-        
-        await websocket.send(f"[SERVER] received: {message}")
+    try:
+        async for message in websocket:
+            print(f"[CLIENT-{websocket.remote_address}]: {message}")
+            await websocket.send(f"[SERVER] received: {message}")
+    except websockets.exceptions.ConnectionClosed:
+        print(f"[SERVER] Client {websocket.remote_address} disconnected")
+    except Exception as e:
+        print(f"[SERVER] Error: {e}")
 
 
 async def main():
@@ -33,8 +34,7 @@ async def main():
     args = parse_args()
     
     async with websockets.serve(handler, "", args.port):
-        await asyncio.Future()  # run forever
-
-
+        await asyncio.Event().wait()  # run forever
+    
 if __name__ == "__main__":
     asyncio.run(main())

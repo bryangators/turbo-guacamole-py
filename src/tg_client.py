@@ -23,7 +23,6 @@ class TgClient:
         print(self.format_client_message("Websocket client closed!"))
 
     def on_open(self, ws):
-        print(self.format_client_message("Opened connection..."))
         self._connected = True
 
     def run(self):      
