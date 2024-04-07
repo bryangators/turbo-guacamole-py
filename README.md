@@ -87,7 +87,6 @@ persistent and bi-directional would be great.
 cache as well as make changes(i.e. remove, expire, or enter data) which will be
 reflected across to all clients.
 
-
 ## Setup
 1. Install Python Virtual Environment:
 ```powershell
