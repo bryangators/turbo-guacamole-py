@@ -105,7 +105,7 @@ pip install -r requirements.txt
 ```powershell
 python start_server.py
 ```
-5. Start Client *(from root of project)*:
+5. (In new terminal) - Start Client  *(from root of project)*:
 ```powershell
 python start_client.py
 ```
