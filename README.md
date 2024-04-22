@@ -86,3 +86,25 @@ persistent and bi-directional would be great.
 4. The server should have some APIs so the user can choose to view data in the
 cache as well as make changes(i.e. remove, expire, or enter data) which will be
 reflected across to all clients.
+
+## Setup
+1. Install Python Virtual Environment:
+```powershell
+python -m venv venv
+```
+2. Start Virtual Environment:
+```powershell
+.\venv\Scripts\activate
+```
+3. Install Dependencies:
+```powershell
+pip install -r requirements.txt
+```
+4. Start Server *(from root of project)*:
+```powershell
+python start_server.py
+```
+5. (In new terminal) - Start Client  *(from root of project)*:
+```powershell
+python start_client.py
+```
